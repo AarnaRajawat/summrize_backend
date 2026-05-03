@@ -7,10 +7,13 @@ dotenv.config();
 
 const app = express();
 
-// 🔥 FIXED CORS (works for mobile + netlify + all browsers)
+// ✅ Correct CORS (works for laptop + mobile + netlify)
 app.use(cors({
-  origin: "*",
-  methods: ["POST", "GET"],
+  origin: [
+    "http://localhost:5173",
+    "https://textsumrizer.netlify.app",
+  ],
+  methods: ["GET", "POST"],
 }));
 
 app.use(express.json());
@@ -34,8 +37,7 @@ app.post("/summarize", async (req, res) => {
       return res.status(400).json({ error: "No text provided" });
     }
 
-    const url =
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
 
     const response = await axios.post(
       url,
