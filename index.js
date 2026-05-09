@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Correct CORS (works for laptop + mobile + netlify)
+// Correct CORS
 app.use(cors({
   origin: [
     "http://localhost:5173",
@@ -71,6 +71,7 @@ app.post("/summarize", async (req, res) => {
 
 // Render dynamic port support
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`🚀 Backend running on port ${PORT}`);
+  console.log(`🔥 Server running on port ${PORT}`);
 });
