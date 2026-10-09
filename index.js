@@ -66,13 +66,14 @@ app.post("/summarize", async (req, res) => {
       });
     }
 
-    const deprecatedModels = ["llama-3.1-8b-instant", "llama3-8b-8192", "llama3-70b-8192"];
     const requestedModel = process.env.GROQ_MODEL;
     const candidateModels = [
-      requestedModel && !deprecatedModels.includes(requestedModel) ? requestedModel : null,
+      requestedModel,
       "openai/gpt-oss-20b",
       "qwen/qwen3.8-27b",
       "openai/gpt-oss-120b",
+      "llama-3.3-70b-versatile",
+      "llama-3.1-8b-instant",
     ].filter((m, idx, arr) => m && arr.indexOf(m) === idx);
 
     let promptInstruction = "Summarize this text concisely and clearly";
